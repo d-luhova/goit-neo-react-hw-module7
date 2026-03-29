@@ -1,0 +1,13 @@
+.searchBox {
+    width: 320px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.searchBoxInput {
+    margin-top: 5px;
+    gap: 10px;
+    padding: 4px;
+    border: 1px solid #ccc;
+}

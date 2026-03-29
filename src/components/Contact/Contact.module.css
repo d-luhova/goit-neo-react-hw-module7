@@ -1,0 +1,38 @@
+.contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 280px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: #fff;
+    word-wrap: break-word;
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.data {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.icon {
+    font-size: 18px;
+    color: black;
+}
+
+.deleteButton {
+    padding: 6px 12px;
+    cursor: pointer;
+}

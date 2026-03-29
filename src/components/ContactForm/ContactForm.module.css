@@ -1,0 +1,33 @@
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.button {
+    padding: 8px 16px;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+    display: inline-block;
+    align-self: center;
+}
