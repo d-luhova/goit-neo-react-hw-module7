@@ -1,55 +1,43 @@
 import styles from './ContactForm.module.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useId } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/contactsOps';
 import { selectContacts } from '../../redux/contactsSlice';
-import { nanoid } from 'nanoid';
 
 const initialValues = { name: '', number: '' };
-
-const schema = Yup.object().shape({
-  name: Yup.string().min(3, 'Too short').max(50, 'Too long').required('Required'),
-  number: Yup.string().min(3, 'Too short').max(50, 'Too long').required('Required'),
+const schema = Yup.object({
+  name: Yup.string().min(3).max(50).required('Required'),
+  number: Yup.string().min(3).max(50).required('Required'),
 });
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const nameInputId = useId();
-  const numberInputId = useId();
+  const allContacts = useSelector(selectContacts);
 
   const handleSubmit = (values, actions) => {
-    const isDuplicate = contacts.some(c => c.name.toLowerCase() === values.name.toLowerCase());
-    if (isDuplicate) {
+    if (allContacts.some(c => c.name.toLowerCase() === values.name.toLowerCase())) {
       alert(`${values.name} is already in contacts.`);
       return;
     }
-    dispatch(addContact({ ...values, id: nanoid() }));
+    dispatch(addContact(values));
     actions.resetForm();
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={schema}
-      onSubmit={handleSubmit}
-      validateOnBlur={true}
-      validateOnChange={false} 
-    >
+    <Formik initialValues={initialValues} validationSchema={schema} onSubmit={handleSubmit}>
       <Form className={styles.contactForm}>
         <div>
-          <label htmlFor={nameInputId}>Name</label>
-          <Field id={nameInputId} name="name" className={styles.input} />
+          <label>Name</label>
+          <Field name="name" className={styles.input} />
           <ErrorMessage name="name" component="div" className={styles.error} />
         </div>
         <div>
-          <label htmlFor={numberInputId}>Number</label>
-          <Field id={numberInputId} name="number" className={styles.input} />
+          <label>Number</label>
+          <Field name="number" className={styles.input} />
           <ErrorMessage name="number" component="div" className={styles.error} />
         </div>
-        <button className={styles.button} type="submit">Add contact</button>
+        <button type="submit" className={styles.button}>Add contact</button>
       </Form>
     </Formik>
   );
